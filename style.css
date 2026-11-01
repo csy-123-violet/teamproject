@@ -1,0 +1,449 @@
+/* ============================================================
+   校园工具箱 · 全局样式
+   负责人：cmsq
+   思路：一套 CSS 变量控制颜色和圆角，四个卡片共用同一套骨架，
+        组员接自己模块时不需要再写布局，只需要用 .btn / .field 这些现成类名。
+   ============================================================ */
+
+:root {
+  /* 颜色 */
+  --bg: #f4f5f8;
+  --bg-grad: radial-gradient(1200px 600px at 10% -10%, #e8ecff 0%, transparent 60%),
+             radial-gradient(900px 500px at 100% 0%, #eafaf4 0%, transparent 55%);
+  --card: #ffffff;
+  --ink: #1b1f26;
+  --muted: #6b7280;
+  --line: #e6e8ee;
+  --accent: #4f46e5;
+  --accent-dark: #4338ca;
+  --accent-soft: #eef0ff;
+  --ok: #10b981;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+
+  /* 尺寸 */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 9px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, .04),
+            0 12px 28px -14px rgba(16, 24, 40, .18);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  padding: 40px 24px 56px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image: var(--bg-grad);
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------- 页头 ---------------- */
+
+.site-header {
+  max-width: 1080px;
+  margin: 0 auto 28px;
+}
+
+.site-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.site-title-en {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.site-subtitle {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------------- 2×2 卡片网格 ---------------- */
+
+.grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 22px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(16, 24, 40, .05),
+              0 20px 40px -18px rgba(16, 24, 40, .26);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-no {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 8px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.card-hint {
+  margin: -6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.card-meta {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.card-meta strong {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- 通用控件 ---------------- */
+
+.btn {
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease,
+              color .15s ease, transform .1s ease;
+}
+
+.btn:hover { border-color: #cfd3dd; background: #fafbfc; }
+.btn:active { transform: scale(.97); }
+
+.btn:focus-visible,
+.field-input:focus-visible,
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 14px -8px var(--accent-dark);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.btn-ghost { color: var(--muted); background: transparent; }
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.field-input {
+  width: 64px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.check input { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+
+/* ---------------- 01 番茄钟 ---------------- */
+
+.mode-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  background: #f3f4f7;
+  border-radius: var(--radius-md);
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 8px 6px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.mode-tab:hover { color: var(--ink); }
+
+.mode-tab.is-active {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .08);
+}
+
+.timer-ring {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin: 4px auto;
+}
+
+.ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg,
+.ring-fg {
+  fill: none;
+  stroke-width: 11;
+  stroke-linecap: round;
+}
+
+.ring-bg { stroke: #eef0f5; }
+
+.ring-fg {
+  stroke: var(--accent);
+  transition: stroke-dashoffset .3s linear, stroke .3s ease;
+}
+
+/* 计时结束时的告警色（由 JS 切换 is-done 类） */
+.timer-ring.is-done .ring-fg { stroke: var(--ok); }
+
+.timer-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.timer-time {
+  font-size: 40px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.timer-state {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 计时进行中让状态文字轻微呼吸 */
+.timer-ring.is-running .timer-state { color: var(--accent); }
+
+/* ---------------- 04 随机座位 ---------------- */
+
+.seat-config {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.seat-display {
+  display: grid;
+  place-items: center;
+  min-height: 104px;
+  padding: 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.seat-roll {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+  color: var(--accent);
+  text-align: center;
+  transition: transform .12s ease;
+}
+
+/* 滚动中：轻微放大 + 变淡，制造"数字飞快跳动"的感觉 */
+.seat-display.is-rolling .seat-roll {
+  transform: scale(1.06);
+  opacity: .55;
+}
+
+/* 抽中结果揭晓时的闪光 */
+@keyframes seat-pop {
+  0%   { transform: scale(.86); }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.seat-display.is-hit .seat-roll {
+  animation: seat-pop .32s ease-out;
+  color: var(--ink);
+}
+
+.seat-display.is-empty .seat-roll {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---------------- 占位模块（02 / 03 待组员实现） ---------------- */
+
+.placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 22px 18px;
+  background: repeating-linear-gradient(
+    135deg, #fafbfd, #fafbfd 10px, #f5f7fb 10px, #f5f7fb 20px
+  );
+  border: 1px dashed #d4d9e4;
+  border-radius: var(--radius-md);
+}
+
+.placeholder-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #8b93a3;
+}
+
+.placeholder-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.placeholder-text code {
+  padding: 1px 5px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--accent);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+/* ---------------- 页脚 ---------------- */
+
+.site-footer {
+  max-width: 1080px;
+  margin: 34px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 12px;
+  color: #9aa1ae;
+  text-align: center;
+}
+
+/* ---------------- 响应式：窄屏落成单列 ---------------- */
+
+@media (max-width: 860px) {
+  body { padding: 26px 16px 40px; }
+  .grid { grid-template-columns: 1fr; gap: 18px; }
+  .site-title { font-size: 24px; }
+  .timer-ring { width: 160px; height: 160px; }
+  .timer-time { font-size: 34px; }
+}
+
+/* 尊重系统"减少动画"设置 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
