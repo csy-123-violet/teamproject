@@ -6,6 +6,7 @@
   <title>校园工具箱 · Campus Kit</title>
   <meta name="description" content="一个不用安装、打开就能用的校园小工具合集：专注番茄钟、待办清单、单位换算、随机座位抽取。">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/todo.css">
 </head>
 <body>
 
@@ -49,7 +50,7 @@
       <p class="card-meta">今日已完成 <strong id="timer-done">0</strong> 个番茄</p>
     </section>
 
-    <!-- ==================== 02 待办清单（留待组员实现） ==================== -->
+    <!-- ==================== 02 待办清单（wyxltyz 负责） ==================== -->
     <section class="card" id="card-todo" aria-labelledby="todo-heading">
       <div class="card-head">
         <span class="card-no">02</span>
@@ -57,20 +58,18 @@
       </div>
       <p class="card-hint">添加、勾选、删除待办事项，刷新页面不丢失。</p>
 
-      <div class="placeholder" id="todo-placeholder">
-        <p class="placeholder-title">此模块待实现</p>
-        <p class="placeholder-text">
-          在 <code>script/todo.js</code> 里写好逻辑，再把 <code>index.html</code>
-          中这段占位内容替换成实际的输入框与列表即可。
-        </p>
-      </div>
-      <!-- 组员实现时，把上面的 .placeholder 换成类似结构：
-      <div class="todo-input-row">
-        <input id="todo-input" type="text" placeholder="要做什么？">
-        <button class="btn btn-primary" id="btn-todo-add">添加</button>
-      </div>
-      <ul class="todo-list" id="todo-list"></ul>
-      -->
+      <form class="todo-input-row" id="todo-form">
+        <label class="field-label" for="todo-input">新待办</label>
+        <div class="todo-input-controls">
+          <input class="field-input" id="todo-input" type="text" placeholder="要做什么？" maxlength="200" autocomplete="off" aria-describedby="todo-feedback">
+          <button class="btn btn-primary" id="btn-todo-add" type="submit">添加</button>
+        </div>
+      </form>
+      <p class="card-meta" id="todo-feedback" role="status"></p>
+      <p class="card-meta" id="todo-storage-status" role="status"></p>
+      <p class="todo-empty" id="todo-empty">还没有待办，添加一件想完成的小事吧。</p>
+      <ul class="todo-list" id="todo-list" aria-label="待办事项"></ul>
+      <p class="card-meta" id="todo-summary" aria-live="polite">共 <strong id="todo-total">0</strong> 项，未完成 <strong id="todo-remaining">0</strong> 项</p>
     </section>
 
     <!-- ==================== 03 单位换算（留待组员实现） ==================== -->
@@ -133,8 +132,8 @@
   </footer>
 
   <script src="script/timer.js"></script>
-  <!-- 组员完成对应模块后，在这里补上对应的一行（去掉前面的注释符号即可）：
   <script src="script/todo.js"></script>
+  <!-- 组员完成对应模块后，在这里补上对应的一行（去掉前面的注释符号即可）：
   <script src="script/convert.js"></script>
   <script src="script/random.js"></script>
   -->

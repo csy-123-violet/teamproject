@@ -1,0 +1,97 @@
+/* 今日待办的局部样式，复用全局颜色与按钮，不影响其他卡片。 */
+#card-todo .todo-input-row {
+  display: grid;
+  gap: 8px;
+}
+
+#card-todo .todo-input-controls {
+  display: flex;
+  gap: 8px;
+}
+
+#card-todo #todo-input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+#card-todo .todo-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#card-todo .todo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+#card-todo .todo-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+#card-todo .todo-checkbox {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+}
+
+#card-todo .todo-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#card-todo .is-complete .todo-text {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+#card-todo .todo-delete {
+  flex: none;
+  padding: 6px 9px;
+  color: var(--danger);
+}
+
+#card-todo .todo-empty {
+  padding: 26px 16px;
+  margin: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+#card-todo #todo-feedback:empty,
+#card-todo #todo-storage-status:empty,
+#card-todo .todo-list:empty {
+  display: none;
+}
+
+#card-todo #todo-feedback,
+#card-todo #todo-storage-status {
+  line-height: 1.6;
+  color: var(--accent-dark);
+}
+
+#card-todo #todo-summary {
+  margin-top: auto;
+}
