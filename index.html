@@ -35,9 +35,10 @@
           <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
           <circle class="ring-fg" cx="100" cy="100" r="88"></circle>
         </svg>
-        <div class="timer-display">
+        <!-- role="timer" 让读屏软件知道这是个计时器；aria-live 只在状态变化时播报，避免每秒念一次 -->
+        <div class="timer-display" role="timer" aria-live="off">
           <span class="timer-time" id="timer-time">25:00</span>
-          <span class="timer-state" id="timer-state">准备开始</span>
+          <span class="timer-state" id="timer-state" aria-live="polite">准备开始</span>
         </div>
       </div>
 
@@ -45,6 +46,8 @@
         <button class="btn btn-primary" id="btn-timer-start">开始</button>
         <button class="btn btn-ghost" id="btn-timer-reset">重置</button>
       </div>
+
+      <p class="card-tip"><kbd>空格</kbd> 开始 / 暂停 · <kbd>R</kbd> 重置</p>
 
       <p class="card-meta">今日已完成 <strong id="timer-done">0</strong> 个番茄</p>
     </section>

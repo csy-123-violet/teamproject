@@ -68,6 +68,23 @@
 
   resetBtn.addEventListener('click', reset);
 
+  // 键盘快捷键：空格 = 开始/暂停，R = 重置。
+  // 焦点在输入框或按钮上时不拦截，否则会抢掉别人正常打字/按按钮的操作。
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' ||
+              t.tagName === 'BUTTON' || t.isContentEditable)) {
+      return;
+    }
+    if (e.code === 'Space' || e.key === ' ') {
+      e.preventDefault();
+      if (running) { pause(); } else { start(); }
+    } else if (e.key === 'r' || e.key === 'R') {
+      e.preventDefault();
+      reset();
+    }
+  });
+
   /* ---------------- 核心逻辑 ---------------- */
 
   function setMode(nextMode, minutes, tabEl) {
