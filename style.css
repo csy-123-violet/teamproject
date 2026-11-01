@@ -27,6 +27,16 @@
   --radius-sm: 9px;
   --shadow: 0 1px 2px rgba(16, 24, 40, .04),
             0 12px 28px -14px rgba(16, 24, 40, .18);
+
+  /* 中性色单独抽出一层：深色模式只需重新声明这一组，组件规则一行都不用改 */
+  --surface: #ffffff;         /* 按钮、输入框的底色 */
+  --surface-2: #f3f4f7;       /* 分段控件的槽底 */
+  --surface-3: #fafbfc;       /* 悬停时的浅底 */
+  --line-strong: #cfd3dd;     /* 悬停时的描边 */
+  --ring-track: #eef0f5;      /* 圆环的底圈 */
+  --dash-a: #fafbfd;          /* 占位块的斜纹 */
+  --dash-b: #f5f7fb;
+  --placeholder-line: #d4d9e4;
 }
 
 * { box-sizing: border-box; }
@@ -151,6 +161,24 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* 快捷键提示：比说明文字再弱一级 */
+.card-tip {
+  margin: -6px 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+  opacity: .82;
+}
+
+.card-tip kbd {
+  padding: 1px 5px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
 /* ---------------- 通用控件 ---------------- */
 
 .btn {
@@ -159,7 +187,7 @@ body {
   font-size: 13.5px;
   font-weight: 600;
   color: var(--ink);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -167,7 +195,7 @@ body {
               color .15s ease, transform .1s ease;
 }
 
-.btn:hover { border-color: #cfd3dd; background: #fafbfc; }
+.btn:hover { border-color: var(--line-strong); background: var(--surface-3); }
 .btn:active { transform: scale(.97); }
 
 .btn:focus-visible,
@@ -215,7 +243,7 @@ input[type="checkbox"]:focus-visible {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   text-align: center;
@@ -239,7 +267,7 @@ input[type="checkbox"]:focus-visible {
   display: flex;
   gap: 6px;
   padding: 4px;
-  background: #f3f4f7;
+  background: var(--surface-2);
   border-radius: var(--radius-md);
 }
 
@@ -261,7 +289,7 @@ input[type="checkbox"]:focus-visible {
 
 .mode-tab.is-active {
   color: var(--ink);
-  background: #fff;
+  background: var(--surface);
   box-shadow: 0 1px 2px rgba(16, 24, 40, .08);
 }
 
@@ -285,7 +313,7 @@ input[type="checkbox"]:focus-visible {
   stroke-linecap: round;
 }
 
-.ring-bg { stroke: #eef0f5; }
+.ring-bg { stroke: var(--ring-track); }
 
 .ring-fg {
   stroke: var(--accent);
@@ -384,9 +412,9 @@ input[type="checkbox"]:focus-visible {
   gap: 8px;
   padding: 22px 18px;
   background: repeating-linear-gradient(
-    135deg, #fafbfd, #fafbfd 10px, #f5f7fb 10px, #f5f7fb 20px
+    135deg, var(--dash-a), var(--dash-a) 10px, var(--dash-b) 10px, var(--dash-b) 20px
   );
-  border: 1px dashed #d4d9e4;
+  border: 1px dashed var(--placeholder-line);
   border-radius: var(--radius-md);
 }
 
@@ -409,7 +437,7 @@ input[type="checkbox"]:focus-visible {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 11.5px;
   color: var(--accent);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 4px;
 }
@@ -426,7 +454,7 @@ input[type="checkbox"]:focus-visible {
 .site-footer p {
   margin: 0;
   font-size: 12px;
-  color: #9aa1ae;
+  color: var(--muted);
   text-align: center;
 }
 
@@ -438,6 +466,51 @@ input[type="checkbox"]:focus-visible {
   .site-title { font-size: 24px; }
   .timer-ring { width: 160px; height: 160px; }
   .timer-time { font-size: 34px; }
+}
+
+/* ---------------- 深色模式 ----------------
+   跟随系统设置自动切换：Windows 里「设置 → 个性化 → 颜色 → 选择你的默认应用模式」选深色即可。
+   这里只重新声明变量，下面的组件规则一行都不用改 —— 这就是当初把颜色抽成变量的好处。
+   --------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg: #0f1115;
+    --bg-grad: radial-gradient(1200px 600px at 10% -10%, #1b2140 0%, transparent 60%),
+               radial-gradient(900px 500px at 100% 0%, #12261f 0%, transparent 55%);
+    --card: #171a21;
+    --ink: #e7eaf0;
+    --muted: #98a1b2;
+    --line: #262b35;
+
+    --accent: #8b8cf7;
+    --accent-dark: #a5a6ff;
+    --accent-soft: #232546;
+    --ok: #34d399;
+    --warn: #fbbf24;
+
+    --surface: #1e222b;
+    --surface-2: #14171d;
+    --surface-3: #22262f;
+    --line-strong: #333a47;
+    --ring-track: #262b35;
+    --dash-a: #1a1e26;
+    --dash-b: #151920;
+    --placeholder-line: #333a47;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, .5),
+              0 14px 30px -16px rgba(0, 0, 0, .9);
+  }
+
+  /* 主按钮在深色下用深字配亮紫，对比度更高 */
+  .btn-primary,
+  .btn-primary:hover {
+    color: #10132b;
+  }
+
+  .ring-bg { stroke: var(--ring-track); }
 }
 
 /* 尊重系统"减少动画"设置 */
