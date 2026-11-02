@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园工具箱 · Campus Kit</title>
+  <meta name="description" content="一个不用安装、打开就能用的校园小工具合集：专注番茄钟、待办清单、单位换算、随机座位抽取。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/todo.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <h1 class="site-title">校园工具箱<span class="site-title-en">Campus Kit</span></h1>
+    <p class="site-subtitle">一个不用安装、双击就能用的四件小事 · 小组 Git 协作练习项目</p>
+  </header>
+
+  <main class="grid">
+
+    <!-- ==================== 01 专注番茄钟（cmsq 负责） ==================== -->
+    <section class="card" id="card-timer" aria-labelledby="timer-heading">
+      <div class="card-head">
+        <span class="card-no">01</span>
+        <h2 class="card-title" id="timer-heading">专注番茄钟</h2>
+      </div>
+      <p class="card-hint">25 分钟专注一段，时间到自动提醒你起身活动。</p>
+
+      <div class="mode-tabs" role="group" aria-label="选择时长">
+        <button class="mode-tab is-active" data-mode="focus" data-min="25">专注 25′</button>
+        <button class="mode-tab" data-mode="short" data-min="5">短休 5′</button>
+        <button class="mode-tab" data-mode="long" data-min="15">长休 15′</button>
+      </div>
+
+      <div class="timer-ring">
+        <svg class="ring-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
+          <circle class="ring-fg" cx="100" cy="100" r="88"></circle>
+        </svg>
+        <!-- role="timer" 让读屏软件知道这是个计时器；aria-live 只在状态变化时播报，避免每秒念一次 -->
+        <div class="timer-display" role="timer" aria-live="off">
+          <span class="timer-time" id="timer-time">25:00</span>
+          <span class="timer-state" id="timer-state" aria-live="polite">准备开始</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btn-timer-start">开始</button>
+        <button class="btn btn-ghost" id="btn-timer-reset">重置</button>
+      </div>
+
+      <p class="card-tip"><kbd>空格</kbd> 开始 / 暂停 · <kbd>R</kbd> 重置</p>
+
+      <p class="card-meta">今日已完成 <strong id="timer-done">0</strong> 个番茄</p>
+    </section>
+
+    <!-- ==================== 02 待办清单（wyxltyz 负责） ==================== -->
+    <section class="card" id="card-todo" aria-labelledby="todo-heading">
+      <div class="card-head">
+        <span class="card-no">02</span>
+        <h2 class="card-title" id="todo-heading">今日待办</h2>
+      </div>
+      <p class="card-hint">添加、勾选、删除待办事项，刷新页面不丢失。</p>
+
+      <form class="todo-input-row" id="todo-form">
+        <label class="field-label" for="todo-input">新待办</label>
+        <div class="todo-input-controls">
+          <input class="field-input" id="todo-input" type="text" placeholder="要做什么？" maxlength="200" autocomplete="off" aria-describedby="todo-feedback">
+          <button class="btn btn-primary" id="btn-todo-add" type="submit">添加</button>
+        </div>
+      </form>
+      <p class="card-meta" id="todo-feedback" role="status"></p>
+      <p class="card-meta" id="todo-storage-status" role="status"></p>
+      <p class="todo-empty" id="todo-empty">还没有待办，添加一件想完成的小事吧。</p>
+      <ul class="todo-list" id="todo-list" aria-label="待办事项"></ul>
+      <p class="card-meta" id="todo-summary" aria-live="polite">共 <strong id="todo-total">0</strong> 项，未完成 <strong id="todo-remaining">0</strong> 项</p>
+    </section>
+
+    <!-- ==================== 03 单位换算（留待组员实现） ==================== -->
+    <section class="card" id="card-convert" aria-labelledby="convert-heading">
+      <div class="card-head">
+        <span class="card-no">03</span>
+        <h2 class="card-title" id="convert-heading">单位换算</h2>
+      </div>
+      <p class="card-hint">厘米与英寸、斤与公斤、摄氏与华氏，输入即换算。</p>
+
+      <div class="placeholder" id="convert-placeholder">
+        <p class="placeholder-title">此模块待实现</p>
+        <p class="placeholder-text">
+          在 <code>script/convert.js</code> 里写好换算逻辑，再把这段占位内容替换成
+          输入框与结果显示区即可。
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 04 随机座位抽取（留待组员实现） ==================== -->
+    <section class="card" id="card-random" aria-labelledby="random-heading">
+      <div class="card-head">
+        <span class="card-no">04</span>
+        <h2 class="card-title" id="random-heading">随机座位抽取</h2>
+      </div>
+      <p class="card-hint">按教室的行数和列数，随机抽一个座位，抽过的不会重复。</p>
+
+      <div class="placeholder" id="random-placeholder">
+        <p class="placeholder-title">此模块待实现</p>
+        <p class="placeholder-text">
+          在 <code>script/random.js</code> 里写好抽取逻辑，再把这段占位内容替换成
+          行列输入框与结果显示区即可。样式已经备好了：
+          <code>.field / .field-input</code> 是输入框，<code>.seat-display / .seat-roll</code>
+          是显示结果的大方块。
+        </p>
+      </div>
+      <!-- 组员实现时，把上面的 .placeholder 换成类似结构：
+      <div class="seat-config">
+        <label class="field"><span class="field-label">行数</span>
+          <input class="field-input" id="seat-rows" type="number" min="1" max="20" value="6"></label>
+        <label class="field"><span class="field-label">列数</span>
+          <input class="field-input" id="seat-cols" type="number" min="1" max="20" value="8"></label>
+        <label class="check"><input id="seat-unique" type="checkbox" checked><span>不重复抽取</span></label>
+      </div>
+      <div class="seat-display" id="seat-display" aria-live="polite">
+        <span class="seat-roll" id="seat-roll">—</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btn-seat-draw">抽一个座位</button>
+        <button class="btn btn-ghost" id="btn-seat-reset">清空记录</button>
+      </div>
+      <p class="card-meta">共 <strong id="seat-total">48</strong> 个座位，已抽 <strong id="seat-used">0</strong> 个</p>
+      -->
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>深圳技术大学 · 团队协作练习项目 · 用 HTML / CSS / JavaScript 原生实现，无任何依赖</p>
+  </footer>
+
+  <script src="script/timer.js"></script>
+  <script src="script/todo.js"></script>
+  <!-- 组员完成对应模块后，在这里补上对应的一行（去掉前面的注释符号即可）：
+  <script src="script/convert.js"></script>
+  <script src="script/random.js"></script>
+  -->
+
+</body>
+</html>
