@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>课堂小工具</title>
+<style>
+:root{
+  --bg:#f5f6f8;
+  --card:#ffffff;
+  --ink:#1f2430;
+  --sub:#6b7280;
+  --line:#e5e7eb;
+  --brand:#3b82f6;
+  --brand-soft:#eff6ff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+}
+.wrap{max-width:720px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:22px;margin:0 0 4px}
+.subtitle{color:var(--sub);font-size:13px;margin:0 0 20px}
+
+/* 顶部标签切换 */
+.tabs{
+  display:flex;gap:8px;background:var(--card);
+  padding:6px;border:1px solid var(--line);border-radius:12px;
+  margin-bottom:20px;
+}
+.tab{
+  flex:1;text-align:center;padding:10px 0;border-radius:8px;
+  font-size:15px;cursor:pointer;user-select:none;color:var(--sub);
+}
+.tab.active{background:var(--brand);color:#fff;font-weight:600}
+.tab:not(.active):hover{background:var(--brand-soft);color:var(--brand)}
+
+/* 面板 */
+.panel{display:none}
+.panel.active{display:block}
+
+/* 换算卡片 */
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:16px;margin-bottom:14px;
+}
+.card h3{margin:0 0 12px;font-size:15px}
+.row{display:flex;align-items:center;gap:10px}
+.field{flex:1}
+.field label{display:block;font-size:12px;color:var(--sub);margin-bottom:4px}
+.field input{
+  width:100%;padding:10px 12px;font-size:16px;
+  border:1px solid var(--line);border-radius:8px;outline:none;
+}
+.field input:focus{border-color:var(--brand);background:var(--brand-soft)}
+.swap{
+  width:36px;height:36px;border:none;border-radius:50%;
+  background:var(--brand-soft);color:var(--brand);
+  font-size:18px;cursor:pointer;flex-shrink:0;
+}
+.swap:hover{background:#dbeafe}
+.result{
+  margin-top:10px;font-size:13px;color:var(--sub);
+  min-height:18px;
+}
+.result b{color:var(--brand);font-size:14px}
+
+/* 占位面板 */
+.placeholder{
+  background:var(--card);border:1px dashed var(--line);
+  border-radius:12px;padding:48px 16px;text-align:center;color:var(--sub);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>课堂小工具</h1>
+  <p class="subtitle">离线使用 · 无需联网 · 打开即用</p>
+
+  <div class="tabs">
+    <div class="tab" data-panel="timer">计时</div>
+    <div class="tab" data-panel="notes">记事</div>
+    <div class="tab active" data-panel="convert">单位换算</div>
+    <div class="tab" data-panel="seat">抽座位</div>
+  </div>
+
+  <!-- 计时（占位） -->
+  <div class="panel" id="panel-timer">
+    <div class="placeholder">⏱ 计时功能 · 待开发</div>
+  </div>
+
+  <!-- 记事（占位） -->
+  <div class="panel" id="panel-notes">
+    <div class="placeholder">📝 记事功能 · 待开发</div>
+  </div>
+
+  <!-- 单位换算 -->
+  <div class="panel active" id="panel-convert">
+
+    <div class="card">
+      <h3>长度：厘米 ↔ 英寸</h3>
+      <div class="row">
+        <div class="field">
+          <label>厘米（cm）</label>
+          <input type="number" step="any" id="cm-in" placeholder="输入厘米">
+        </div>
+        <button class="swap" id="cm-swap" title="交换方向">⇄</button>
+        <div class="field">
+          <label>英寸（inch）</label>
+          <input type="number" step="any" id="inch-in" placeholder="输入英寸">
+        </div>
+      </div>
+      <div class="result" id="cm-result"></div>
+    </div>
+
+    <div class="card">
+      <h3>重量：斤 ↔ 公斤</h3>
+      <div class="row">
+        <div class="field">
+          <label>斤</label>
+          <input type="number" step="any" id="jin-in" placeholder="输入斤">
+        </div>
+        <button class="swap" id="jin-swap" title="交换方向">⇄</button>
+        <div class="field">
+          <label>公斤（kg）</label>
+          <input type="number" step="any" id="kg-in" placeholder="输入公斤">
+        </div>
+      </div>
+      <div class="result" id="jin-result"></div>
+    </div>
+
+    <div class="card">
+      <h3>温度：摄氏 ↔ 华氏</h3>
+      <div class="row">
+        <div class="field">
+          <label>摄氏度（℃）</label>
+          <input type="number" step="any" id="c-in" placeholder="输入摄氏度">
+        </div>
+        <button class="swap" id="c-swap" title="交换方向">⇄</button>
+        <div class="field">
+          <label>华氏度（℉）</label>
+          <input type="number" step="any" id="f-in" placeholder="输入华氏度">
+        </div>
+      </div>
+      <div class="result" id="c-result"></div>
+    </div>
+
+  </div>
+
+  <!-- 抽座位（占位） -->
+  <div class="panel" id="panel-seat">
+    <div class="placeholder">🎲 抽座位功能 · 待开发</div>
+  </div>
+</div>
+
+<script>
+/* ================= 标签切换 ================= */
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+
+/* ================= 通用换算组件 =================
+   用法：bindConvert({
+     left:  左输入框 id, right: 右输入框 id,
+     toRight: 左->右 的换算函数, toLeft: 右->左 的换算函数,
+     result: 结果提示行 id,
+     leftName / rightName: 提示文字里的单位名
+   })
+   在任一侧输入时，另一侧即时更新；清空一侧则另一侧同步清空。 */
+function bindConvert(opt){
+  var left  = document.getElementById(opt.left);
+  var right = document.getElementById(opt.right);
+  var result= document.getElementById(opt.result);
+  var fmt = function(v){ return Math.round(v * 100) / 100; };
+
+  function show(text){ result.innerHTML = text; }
+
+  function fromLeft(){
+    var v = parseFloat(left.value);
+    if (isNaN(v)) {           // 左侧为空或非法：清空右侧
+      right.value = '';
+      show('&nbsp;');
+      return;
+    }
+    var r = opt.toRight(v);
+    right.value = fmt(r);
+    show(v + ' ' + opt.leftName + ' = <b>' + fmt(r) + ' ' + opt.rightName + '</b>');
+  }
+
+  function fromRight(){
+    var v = parseFloat(right.value);
+    if (isNaN(v)) {
+      left.value = '';
+      show('&nbsp;');
+      return;
+    }
+    var r = opt.toLeft(v);
+    left.value = fmt(r);
+    show(v + ' ' + opt.rightName + ' = <b>' + fmt(r) + ' ' + opt.leftName + '</b>');
+  }
+
+  left.addEventListener('input', fromLeft);
+  right.addEventListener('input', fromRight);
+
+  /* 交换按钮：把当前结果搬到另一侧并反转方向 */
+  document.getElementById(opt.swapBtn).addEventListener('click', function(){
+    var lv = parseFloat(left.value), rv = parseFloat(right.value);
+    if (isNaN(lv) && isNaN(rv)) return;
+    /* 交换两侧当前数值，并自动补算一次让结果行保持一致 */
+    var tmp = left.value;
+    left.value = right.value;
+    right.value = tmp;
+    if (left.value !== '') { fromLeft(); } else { fromRight(); }
+  });
+}
+
+/* ================= 三个换算的具体定义 ================= */
+
+/* 长度：1 英寸 = 2.54 厘米 */
+bindConvert({
+  left:'cm-in', right:'inch-in', swapBtn:'cm-swap', result:'cm-result',
+  leftName:'厘米', rightName:'英寸',
+  toRight: function(v){ return v / 2.54; },
+  toLeft:  function(v){ return v * 2.54; }
+});
+
+/* 重量：1 公斤 = 2 斤 */
+bindConvert({
+  left:'jin-in', right:'kg-in', swapBtn:'jin-swap', result:'jin-result',
+  leftName:'斤', rightName:'公斤',
+  toRight: function(v){ return v / 2; },
+  toLeft:  function(v){ return v * 2; }
+});
+
+/* 温度：华氏 = 摄氏 × 9/5 + 32 */
+bindConvert({
+  left:'c-in', right:'f-in', swapBtn:'c-swap', result:'c-result',
+  leftName:'℃', rightName:'℉',
+  toRight: function(v){ return v * 9 / 5 + 32; },
+  toLeft:  function(v){ return (v - 32) * 5 / 9; }
+});
+</script>
+</body>
+</html>
